@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MyLedger - personal expense tracker">
+  <title>MyLedger · Personal Expense Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="home">
+  <header>
+    <nav class="wrap">
+      <a class="brand" href="index.html">₹ MyLedger</a>
+      <a href="#auth">Log in</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <h1>Know where every rupee goes.</h1>
+        <p class="muted">Track daily expenses by category and tag, set a monthly budget, get email alerts and see clear monthly reports.</p>
+      </div>
+
+      <section id="auth" class="card">
+        <div class="tabs">
+          <button type="button" class="tab on" data-show="login">Log in</button>
+          <button type="button" class="tab" data-show="register">Register</button>
+        </div>
+        <p class="error" id="auth-error" role="alert"></p>
+
+        <form id="login" novalidate>
+          <label>Email <input name="email" type="email" required autocomplete="email"></label>
+          <label>Password <input name="password" type="password" required minlength="8" autocomplete="current-password"></label>
+          <button>Log in</button>
+          <small class="muted">Demo: demo@expense.app / Demo@1234</small>
+        </form>
+
+        <form id="register" novalidate hidden>
+          <label>Full name <input name="name" required minlength="2" maxlength="50" pattern="[A-Za-z][A-Za-z .'\-]{1,49}" title="2-50 letters"></label>
+          <label>Email <input name="email" type="email" required autocomplete="email"></label>
+          <label>Password <input name="password" type="password" required minlength="8" maxlength="64" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,64}" title="8+ characters with upper, lower, number and symbol" autocomplete="new-password"></label>
+          <label>Confirm password <input name="confirm" type="password" required autocomplete="new-password"></label>
+          <label class="row"><input type="checkbox" required> I agree to the terms</label>
+          <button>Create account</button>
+        </form>
+      </section>
+    </section>
+
+    <section class="grid">
+      <article class="card"><h2>🧾 Log expenses</h2><p>Category, tags, payment method and an optional receipt photo.</p></article>
+      <article class="card"><h2>📊 Monthly reports</h2><p>Spending by category, payment method, tag and a 6-month trend.</p></article>
+      <article class="card"><h2>🔔 Budget alerts</h2><p>An email when you cross 80% and 100% of your budget.</p></article>
+    </section>
+  </main>
+
+  <footer class="wrap muted">© 2026 MyLedger · Full Stack Development Mini Project</footer>
+  <script src="app.js"></script>
+</body>
+</html>

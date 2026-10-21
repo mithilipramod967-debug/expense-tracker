@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard · MyLedger</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="dash">
+  <header>
+    <nav class="wrap">
+      <a class="brand" href="index.html">₹ MyLedger</a>
+      <a href="#expenses">Expenses</a>
+      <a href="#reports">Reports</a>
+      <a href="#profile">Profile</a>
+      <button type="button" id="logout" class="ghost">Log out</button>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="stats">
+      <article class="card"><small>Spent this month</small><b id="s-total">–</b></article>
+      <article class="card"><small>Budget left</small><b id="s-left">–</b></article>
+      <article class="card"><small>Transactions</small><b id="s-count">–</b></article>
+      <article class="card"><small>Largest</small><b id="s-max">–</b></article>
+    </section>
+    <div class="meter"><span id="meter"></span></div>
+
+    <section id="expenses" class="split">
+      <form id="expense" class="card" novalidate>
+        <h2 id="form-title">Add expense</h2>
+        <p class="error" id="form-error" role="alert"></p>
+        <input type="hidden" name="id">
+        <label>Title <input name="title" required minlength="2" maxlength="80" pattern="[^<>]{2,80}" title="2-80 characters, no &lt; or &gt;"></label>
+        <div class="two">
+          <label>Amount <input name="amount" type="number" required min="0.01" max="999999999" step="0.01"></label>
+          <label>Date <input name="date" type="date" required></label>
+        </div>
+        <label>Category <select name="category" required></select></label>
+        <fieldset>
+          <legend>Payment method</legend>
+          <label class="row"><input type="radio" name="method" value="UPI" checked> UPI</label>
+          <label class="row"><input type="radio" name="method" value="Cash"> Cash</label>
+          <label class="row"><input type="radio" name="method" value="Card"> Card</label>
+          <label class="row"><input type="radio" name="method" value="Net Banking"> Net Banking</label>
+        </fieldset>
+        <label>Tags <input name="tags" list="tag-list" placeholder="college, friends" pattern="[A-Za-z0-9 ,\-]{0,100}"></label>
+        <datalist id="tag-list"></datalist>
+        <label>Receipt (JPG, PNG or PDF, max 2 MB) <input name="receipt" type="file" accept="image/jpeg,image/png,application/pdf"></label>
+        <div class="row">
+          <button>Save</button>
+          <button type="reset" class="ghost">Clear</button>
+          <button type="button" id="quick" class="ghost">⚡ Quick add</button>
+        </div>
+      </form>
+
+      <section class="card">
+        <h2>Expenses <small class="muted" id="sum"></small></h2>
+        <form id="filters" class="filters">
+          <input name="q" type="search" placeholder="Search title" aria-label="Search">
+          <input name="month" type="month" aria-label="Month">
+          <select name="category" aria-label="Category"></select>
+          <select name="tag" aria-label="Tag"></select>
+        </form>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Date</th><th>Title</th><th>Category</th><th>Tags</th><th class="num">Amount</th><th></th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <p class="row"><button type="button" class="ghost" id="prev">← Prev</button><span id="page" class="muted"></span><button type="button" class="ghost" id="next">Next →</button></p>
+      </section>
+    </section>
+
+    <section id="reports">
+      <div class="row">
+        <h2>Reports</h2>
+        <input type="month" id="r-month" aria-label="Report month">
+        <button type="button" id="email" class="ghost">✉ Email me this report</button>
+      </div>
+      <div class="grid">
+        <article class="card"><h3>By category</h3><ul class="bars" id="r-cat"></ul></article>
+        <article class="card"><h3>By payment method</h3><ul class="bars" id="r-method"></ul></article>
+        <article class="card"><h3>Top tags</h3><ul class="bars" id="r-tags"></ul></article>
+        <article class="card"><h3>6-month trend</h3><ul class="bars" id="r-trend"></ul></article>
+      </div>
+    </section>
+
+    <section id="profile" class="split">
+      <form id="me" class="card" novalidate>
+        <h2>Profile</h2>
+        <label>Name <input name="name" required pattern="[A-Za-z][A-Za-z .'\-]{1,49}"></label>
+        <label>Email <input name="email" type="email" disabled></label>
+        <label>Monthly budget (₹) <input name="budget" type="number" min="0" max="1000000000" required></label>
+        <label class="row"><input type="checkbox" name="alerts"> Email me at 80% and 100% of budget</label>
+        <button>Save profile</button>
+      </form>
+      <form id="cat" class="card" novalidate>
+        <h2>Categories</h2>
+        <div class="row">
+          <input name="name" required minlength="2" maxlength="30" placeholder="New category" aria-label="Category name">
+          <input name="color" type="color" value="#0f766e" aria-label="Colour">
+          <button>Add</button>
+        </div>
+        <ul class="bars" id="cats"></ul>
+      </form>
+    </section>
+  </main>
+
+  <dialog id="viewer"><button type="button" class="ghost" id="close">✕ Close</button><div id="receipt"></div></dialog>
+  <footer class="wrap muted">© 2026 MyLedger</footer>
+  <script src="app.js"></script>
+</body>
+</html>
