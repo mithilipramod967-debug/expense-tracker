@@ -7,7 +7,6 @@ pipeline {
     stage('Test') { steps { script { run('npm test') } } }
     stage('Build WAR') { steps { script { run('npm run war') }; archiveArtifacts 'expense-tracker.war' } }
     stage('Deploy to Tomcat') {
-      when { branch 'master' }
       steps { script { isUnix() ? sh('cp expense-tracker.war "$CATALINA_HOME/webapps/"') : bat('copy /Y expense-tracker.war "%CATALINA_HOME%\\webapps\\"') } }
     }
   }
