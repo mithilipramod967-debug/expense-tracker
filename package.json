@@ -7,12 +7,12 @@
     "start": "node server.js",
     "seed": "node server.js seed",
     "report": "node server.js report",
-    "core": "node core.js",
     "debug": "node --inspect server.js",
-    "test": "node --test test.js",
     "war": "jar -cf expense-tracker.war -C public ."
   },
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "dotenv": "^16.4.7",

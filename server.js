@@ -327,5 +327,4 @@ async function main(cmd) {
   await mongoose.disconnect();
 }
 
-if (require.main === module) main(process.argv[2]).catch((e) => { console.error(e.message); process.exit(1); });
-module.exports = { app, RX, clean, noOps };
+main(process.argv[2]).catch((e) => { console.error(e.message); process.exit(1); });
