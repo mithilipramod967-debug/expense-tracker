@@ -32,9 +32,6 @@ Without SMTP settings in `.env`, emails are saved in `logs/emails/`.
 ## Git
 `git log --oneline --graph --all` shows the commit history with `master` and `develop` branches.
 
-## Tomcat
-Run `npm run war`, copy `expense-tracker.war` into `<tomcat>/webapps/`, keep `npm start` running, and open http://localhost:8080/expense-tracker/.
-
 ## Render
 Create a new Web Service from the GitHub repo:
 - Build command: `npm ci`
